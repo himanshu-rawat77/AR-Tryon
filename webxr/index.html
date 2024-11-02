@@ -2,38 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>3D Model Viewer with AR</title>
+  <title>AR Viewer</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    model-viewer {
-      width: 100%;
-      height: 500px;
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: #f0f0f0;
     }
     #ar-button {
       background-color: #4285f4;
       color: white;
+      border: none;
       border-radius: 18px;
-      padding: 10px;
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #ar-button:hover {
+      background-color: #3367d6;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <model-viewer
     src="pizza 12.03.12 AM/pizza.gltf"
-    ios-src="path/to/your/model.usdz"
-    poster="path/to/your/poster-image.jpg"
-    shadow-intensity="1"
+    ios-src="pizza 12.03.12 AM/pizza.usdz"
     ar
     ar-modes="webxr scene-viewer quick-look"
-    camera-controls
-    environment-image="neutral"
-    alt="A 3D model">
-    <button slot="ar-button" id="ar-button">View in your space</button>
+    camera-controls="false"
+    alt="A 3D model in AR"
+    class="hidden">
+    <button slot="ar-button" id="ar-button">View in AR</button>
   </model-viewer>
+
+  <button id="standalone-ar-button">Launch AR Experience</button>
+
+  <script>
+    const modelViewer = document.querySelector('model-viewer');
+    const standaloneButton = document.getElementById('standalone-ar-button');
+
+    standaloneButton.addEventListener('click', () => {
+      if (modelViewer.canActivateAR) {
+        modelViewer.activateAR();
+      } else {
+        alert('AR is not supported on this device or browser.');
+      }
+    });
+  </script>
 </body>
 </html>
