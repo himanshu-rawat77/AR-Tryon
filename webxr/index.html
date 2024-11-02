@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Model Viewer with AR</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    model-viewer {
+      width: 100%;
+      height: 500px;
+      background-color: #f0f0f0;
+    }
+    #ar-button {
+      background-color: #4285f4;
+      color: white;
+      border-radius: 18px;
+      padding: 10px;
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    src="pizza 12.03.12 AM/pizza.gltf"
+    ios-src="path/to/your/model.usdz"
+    poster="path/to/your/poster-image.jpg"
+    shadow-intensity="1"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls
+    environment-image="neutral"
+    alt="A 3D model">
+    <button slot="ar-button" id="ar-button">View in your space</button>
+  </model-viewer>
+</body>
+</html>
